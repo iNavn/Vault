@@ -15,6 +15,15 @@ graph LR
     Application --> Domain[Vault.Domain]
 \`\`\`
 
+## Requisitos previos
+1. .NET SDK 10
+2. Docker
+3. Visual Studio 2026 Community
+4. Git
+5. pgAdmin 4
+6. RedisInsight
+7. k6
+
 ## Setup local
 1. .NET 10 SDK
 2. Docker Desktop (Postgres + Redis en contenedores — se añade en el Módulo 3/4)
