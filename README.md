@@ -17,12 +17,17 @@ graph LR
 
 ## Requisitos previos
 1. .NET SDK 10
-2. Docker
+2. Docker Desktop
 3. Visual Studio 2026 Community
 4. Git
 5. pgAdmin 4
 6. RedisInsight
 7. k6
+
+## Flujo de Git
+- `main` está protegida: todo cambio pasa por Pull Request.
+- Convención de ramas: `<tipo>/<descripción-corta>` (feat, fix, docs, chore, refactor, test).
+- Convención de commits: Conventional Commits.
 
 ## Setup local
 1. .NET 10 SDK
