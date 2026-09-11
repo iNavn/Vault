@@ -7,13 +7,13 @@ Gestor de contraseñas multi-cliente (móvil, escritorio, web) sobre una única 
 
 ## Arquitectura
 
-\`\`\`mermaid
+```mermaid
 graph LR
     Api[Vault.Api] --> Application[Vault.Application]
     Api --> Infrastructure[Vault.Infrastructure]
     Infrastructure --> Application
     Application --> Domain[Vault.Domain]
-\`\`\`
+```
 
 ## Requisitos previos
 1. .NET SDK 10
