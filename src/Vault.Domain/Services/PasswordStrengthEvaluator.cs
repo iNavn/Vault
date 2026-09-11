@@ -29,7 +29,8 @@ public static class PasswordStrengthEvaluator
 
 		return (password.Length, varietyCount) switch
 		{
-			( < 8, _) => new PasswordStrengthResult(PasswordStrengthLevel.Weak, "Menos de 8 caracteres."),
+            ( < 4, _) => new PasswordStrengthResult(PasswordStrengthLevel.Weak, "Extremadamente corta"),
+            ( < 8, _) => new PasswordStrengthResult(PasswordStrengthLevel.Weak, "Menos de 8 caracteres."),
 			( >= 8, 1) => new PasswordStrengthResult(PasswordStrengthLevel.Weak, "Solo usa un tipo de carácter."),
 			( >= 8, 2) => new PasswordStrengthResult(PasswordStrengthLevel.Medium, "Combina dos tipos de carácter."),
 			( >= 12, >= 3) => new PasswordStrengthResult(PasswordStrengthLevel.VeryStrong, "Longitud robusta y variedad alta de caracteres."),
