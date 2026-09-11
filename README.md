@@ -28,7 +28,6 @@ graph LR
 - `main` está protegida: todo cambio pasa por Pull Request, sin excepciones para administradores.
 - Convención de ramas: `<tipo>/<descripción-corta>` (feat, fix, docs, chore, refactor, test).
 - Convención de commits: Conventional Commits.
-- `main` protegida incluso para administradores; no hay excepciones de push directo.
 
 ## Setup local
 1. .NET 10 SDK
