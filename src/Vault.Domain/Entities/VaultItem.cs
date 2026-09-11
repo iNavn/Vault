@@ -25,6 +25,9 @@ public sealed class VaultItem
         ArgumentException.ThrowIfNullOrWhiteSpace(username);
         ArgumentException.ThrowIfNullOrWhiteSpace(encryptedPassword);
 
+        if (siteName.Length > 70) // límite razonable para nombres de sitio/servicio, evita abusos sin ser restrictivo
+            throw new ArgumentException("El nombre del sitio no puede superar 70 caracteres.", nameof(siteName));
+
         return new VaultItem(Guid.NewGuid(), categoryId, siteName.Trim(), username.Trim(), encryptedPassword, DateTime.UtcNow);
     }
 
