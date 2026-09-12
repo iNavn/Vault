@@ -1,6 +1,7 @@
 ﻿using Vault.Application.Repositories;
 using Vault.Domain.Entities;
 using Vault.Infrastructure.Repositories;
+using Vault.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,19 +55,6 @@ app.MapGet("/vault-items/{categoryId:guid}", async (Guid categoryId, IVaultItemR
     return items.Count != 0 ? Results.Ok(items) : Results.NotFound();
 });
 
-app.MapPost("/categories/{name}", async (string name, ICategoryRepository repo) =>
-{
-    var categoria = Category.Create(name);
-    await repo.AddAsync(categoria);
-
-    return Results.Ok(categoria.Id);
-});
-
-app.MapGet("/categories/{id:guid}", async (Guid id, ICategoryRepository repo) =>
-{
-    var categoria = await repo.GetByIdAsync(id);
-
-    return categoria != null ? Results.Ok(categoria) : Results.NotFound();
-});
+app.MapCategoryEndpoints();
 
 app.Run();
