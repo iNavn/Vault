@@ -65,3 +65,7 @@ Contratos definidos en Vault.Application, con implementaciones temporales en mem
   Incluye `GetWeakPasswordItemsAsync()`, que evalúa fortaleza sobre `EncryptedPassword`
   asumiendo (temporalmente) que sigue siendo texto plano — ver comentario en el código.
 - `ICategoryRepository` → `InMemoryCategoryRepository`
+
+## Organización de endpoints
+Los endpoints se agrupan por dominio en Vault.Api/Endpoints/ (extension methods sobre WebApplication),
+no directamente en Program.cs. Minimal APIs elegido sobre Controllers por simplicidad para una API pura.
