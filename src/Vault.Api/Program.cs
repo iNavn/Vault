@@ -40,9 +40,16 @@ app.MapPost("/vault-items/{categoryId:guid}/{siteName}/{username}/{encryptedPass
         return Results.Ok(item.Id);
     });
 
-app.MapGet("/vault-item/weak-passwords/", async (IVaultItemRepository repo) =>
+app.MapGet("/vault-items/weak-passwords/", async (IVaultItemRepository repo) =>
 {
     var items = await repo.GetWeakPasswordItemsAsync();
+
+    return items.Count != 0 ? Results.Ok(items) : Results.NotFound();
+});
+
+app.MapGet("/vault-items/{categoryId:guid}", async (Guid categoryId, IVaultItemRepository repo) =>
+{
+    var items = await repo.GetByCategoryAsync(categoryId);
 
     return items.Count != 0 ? Results.Ok(items) : Results.NotFound();
 });
