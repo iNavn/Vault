@@ -59,5 +59,9 @@ classDiagram
 Ver carpeta `/docs/adr` (se añadirá cuando haya la primera decisión relevante).
 
 ## Repositorios
-`IVaultItemRepository` definido en Vault.Application. Implementación actual:
-InMemoryVaultItemRepository (temporal, se reemplaza por EF Core en el Módulo 3).
+Contratos definidos en Vault.Application, con implementaciones temporales en memoria
+(se reemplazan por EF Core en el Módulo 3):
+- `IVaultItemRepository` → `InMemoryVaultItemRepository`
+  Incluye `GetWeakPasswordItemsAsync()`, que evalúa fortaleza sobre `EncryptedPassword`
+  asumiendo (temporalmente) que sigue siendo texto plano — ver comentario en el código.
+- `ICategoryRepository` → `InMemoryCategoryRepository`
