@@ -1,7 +1,8 @@
+﻿using Vault.Application.Repositories;
+using Vault.Infrastructure.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
-
-app.MapGet("/", () => "Hello World!");
 
 app.MapGet("/ping", saludoConFecha);
 static string saludoConFecha()
@@ -26,5 +27,7 @@ static string ConstruirSaludo(int indice)
 {
     return $"Saludo #{indice} generado a las {DateTime.UtcNow:HH:mm:ss}\n";
 }
+
+builder.Services.AddSingleton<IVaultItemRepository, InMemoryVaultItemRepository>();
 
 app.Run();
