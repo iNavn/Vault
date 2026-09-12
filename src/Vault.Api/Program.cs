@@ -31,6 +31,22 @@ static string ConstruirSaludo(int indice)
     return $"Saludo #{indice} generado a las {DateTime.UtcNow:HH:mm:ss}\n";
 }
 
+app.MapPost("/vault-items/{categoryId:guid}/{siteName}/{username}/{encryptedPassword}",
+    async (Guid categoryId, string siteName, string username, string encryptedPassword, IVaultItemRepository repo) =>
+    {
+        var item = VaultItem.Create(categoryId, siteName, username, encryptedPassword);
+        await repo.AddAsync(item);
+
+        return Results.Ok(item.Id);
+    });
+
+app.MapGet("/vault-item/weak-passwords/", async (IVaultItemRepository repo) =>
+{
+    var items = await repo.GetWeakPasswordItemsAsync();
+
+    return items.Count != 0 ? Results.Ok(items) : Results.NotFound();
+});
+
 app.MapPost("/categories/{name}", async (string name, ICategoryRepository repo) =>
 {
     var categoria = Category.Create(name);
