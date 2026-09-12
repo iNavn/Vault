@@ -57,3 +57,7 @@ classDiagram
 
 ## Decisiones de arquitectura
 Ver carpeta `/docs/adr` (se añadirá cuando haya la primera decisión relevante).
+
+## Repositorios
+`IVaultItemRepository` definido en Vault.Application. Implementación actual:
+InMemoryVaultItemRepository (temporal, se reemplaza por EF Core en el Módulo 3).
