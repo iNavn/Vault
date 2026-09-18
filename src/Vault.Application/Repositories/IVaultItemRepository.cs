@@ -8,4 +8,5 @@ public interface IVaultItemRepository
     Task<IReadOnlyList<VaultItem>> GetByCategoryAsync(Guid categoryId);
     Task AddAsync(VaultItem item);
     Task<IReadOnlyList<VaultItem>> GetWeakPasswordItemsAsync();
+    Task<IReadOnlyList<VaultItem>> GetAllAsync();
 }

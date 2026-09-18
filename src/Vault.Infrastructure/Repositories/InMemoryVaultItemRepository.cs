@@ -44,4 +44,11 @@ public sealed class InMemoryVaultItemRepository : IVaultItemRepository
 
         return Task.FromResult(result);
     }
+
+    public Task<IReadOnlyList<VaultItem>> GetAllAsync()
+    {
+        IReadOnlyList<VaultItem> items = _items.ToList();
+
+        return Task.FromResult(items);
+    }
 }
