@@ -31,5 +31,13 @@ public static class VaultItemEndpoints
 
             return items.Count != 0 ? Results.Ok(items) : Results.NotFound();
         });
+
+        group.MapGet("/stats", async (IVaultItemRepository repo) =>
+        {
+            var todos = await repo.GetAllAsync();
+            var debiles = await repo.GetWeakPasswordItemsAsync();
+
+            return Results.Ok(new { Total = todos.Count, Weak = debiles.Count });
+        });
     }
 }
