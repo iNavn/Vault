@@ -70,6 +70,16 @@ Contratos definidos en Vault.Application, con implementaciones temporales en mem
 Los endpoints se agrupan por dominio en Vault.Api/Endpoints/ (extension methods sobre WebApplication),
 no directamente en Program.cs. Minimal APIs elegido sobre Controllers por simplicidad para una API pura.
 
+## Nota de diseño: lifetime de los repositorios (Scoped vs Singleton)
+Los repositorios en memoria usan `Singleton` (no `Scoped`) porque necesitan persistir datos
+entre peticiones HTTP distintas mientras no existe una base de datos real. Se confirmó
+experimentalmente: con `Scoped`, un VaultItem creado en un POST no aparecía en un GET
+posterior, porque cada petición recibe su propia instancia con su propia lista vacía —
+el ámbito (scope) termina junto con la petición. Con Singleton, la misma instancia
+(y su misma lista) vive durante toda la ejecución de la app.
+Este comportamiento cambiará en el Módulo 3: el DbContext de EF Core se registrará como
+Scoped, ya que ahí la persistencia real la da PostgreSQL, no la memoria del proceso.
+
 ## Endpoints
 - `GET /vault-items/stats` — conteo total y de contraseñas débiles. Usa await secuencial
   (no Task.WhenAll) porque las implementaciones actuales en memoria no tienen espera real de I/O;
