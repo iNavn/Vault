@@ -69,3 +69,8 @@ Contratos definidos en Vault.Application, con implementaciones temporales en mem
 ## Organización de endpoints
 Los endpoints se agrupan por dominio en Vault.Api/Endpoints/ (extension methods sobre WebApplication),
 no directamente en Program.cs. Minimal APIs elegido sobre Controllers por simplicidad para una API pura.
+
+## Endpoints
+- `GET /vault-items/stats` — conteo total y de contraseñas débiles. Usa await secuencial
+  (no Task.WhenAll) porque las implementaciones actuales en memoria no tienen espera real de I/O;
+  se reevaluará cuando EF Core reemplace estos repositorios en el Módulo 3.
